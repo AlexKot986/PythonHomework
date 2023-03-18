@@ -50,7 +50,7 @@ def ScrabbleLatin(word):
 
 def ScrabbleKiril(word):
     dictionary_Kiril = {}
-    kiril = [chr(i) for i in range(1040, 1071)]
+    kiril = [chr(i) for i in range(1040, 1072)]
     for i in range(len(kiril)):
         if kiril[i] == 'Ф' or kiril[i] == 'Щ' or kiril[i] == 'Ъ':
             dictionary_Kiril[kiril[i]] = 10
@@ -77,9 +77,9 @@ def LatinOrKiril(word):
     kiril_word = 0
 
     for i in word.upper():
-        if ord(i) >= 65 and ord(i) <= 91:
+        if ord(i) >= 65 and ord(i) < 91:
             latin_word += 1
-        if ord(i) >= 1040 and ord(i) <= 1071:
+        if ord(i) >= 1040 and ord(i) < 1072:
             kiril_word += 1
     if len(word) == latin_word:
         return 0
