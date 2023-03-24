@@ -15,8 +15,8 @@ print(f'a = {a}, b = {b}')
 def NumSum(n, m):
     if m == 0:
         return n
-    n += 1
-    return NumSum(n, m - 1)
+    
+    return NumSum(n + 1, m - 1)
 
 print(f'a + b = {NumSum(a, b)}')
 
