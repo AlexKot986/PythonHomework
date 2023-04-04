@@ -2,7 +2,9 @@ id,lastname,firstname,secongname,phone
 2,Petrov,Petr,Petrovich,71239999999
 3,Vasich,Vasiliy,Vasilievich,71209876543
 4,Jychkina,Larisa,Albertovna,71209873456
-6,Utkina,Zinaida,Gus,7123344566
+6,Keks,Zinaida,Gus,7123344566
 7,Hrenova,Gadia,Petrovich,71234445555
-8,Keks,Рулет,Круасанович,72837450194
-10,Pupkin,Vladislav,None,71029387745
+8,Keks,Рулет,None,72837450194
+11,Ivanov,Keks,Palich,71626262534
+12,Ivanov,Petr,None,73323345654
+13,Pupkin,Vladislav,Keks,71111123435
