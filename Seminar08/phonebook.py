@@ -46,7 +46,7 @@ def change_item(filename):
     change_ID = find_item(filename)
     if change_ID != None:
         change_user = input('Изменить? Y/N: ')
-        # print(change_ID)
+
         if change_user.upper() == 'Y':
             what_change = input('Что изменить?\nФамилию - L, Имя - F, Отчество - S, Телефон - P, Всё - любой символ: ')
             if what_change.upper() == 'L':
@@ -94,11 +94,8 @@ def find_item(filename):
             found_user = i
             count_found_users[data_array[i][0]] = found_user
             
-    # print(count_found_users)
-    # print(len(count_found_users))
     if len(count_found_users) > 1:
         print('Выбери ID: ', end='')
-        # print(count_found_users[input()])
         try:
             return count_found_users[input()]
         except:
@@ -106,7 +103,6 @@ def find_item(filename):
     elif len(count_found_users) < 1:
         print('Такого нет!')
     else:
-        # print(i, len(data_array) - 1, count_found_users, )
         return found_user
 
 def format_name(name):
