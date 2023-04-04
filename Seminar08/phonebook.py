@@ -15,14 +15,17 @@ def write_file(filename, data_array):
 def add_item(filename, lastname = '', firstname = '', secondname = '', phone = ''):
     data_array = read_file(filename) 
     max_id = 0
+
     for i in range(1,len(data_array)):
         if max_id < int(data_array[i][0]): 
             max_id = int(data_array[i][0])
     next_id = max_id + 1
-    lastname = input('Фамилия: ')
-    firstname = input('Имя: ')
-    secondname = input('Отчество: ')
+
+    lastname = format_name(input('Фамилия: '))
+    firstname = format_name(input('Имя: '))
+    secondname = format_name(input('Отчество: '))
     phone = input('Телефон: ')
+
     new_item = []
     new_item.append(str(next_id))
     new_item.append(lastname)
@@ -41,23 +44,30 @@ def show_all_items(filename):
 def change_item(filename):
     data_array = read_file(filename)
     change_ID = find_item(filename)
-    change_user = input('Изменить? Y/N: ')
-    
-    if change_user.upper() == 'Y':
-        lastname = input('Фамилия: ')
-        firstname = input('Имя: ')
-        secondname = input('Отчество: ')
-        phone = input('Телефон: ')
-        data_array[change_ID][1] = lastname
-        data_array[change_ID][2] = firstname
-        data_array[change_ID][3] = secondname
-        data_array[change_ID][4] = phone
-        print('Изменен ID: {}  Фамилия: {}  Имя: {}  Отчество: {}  Телефон: {}'.format(data_array[change_ID][0], data_array[change_ID][1], data_array[change_ID][2], data_array[change_ID][3], data_array[change_ID][4]))
-        
-        write_file(filename, data_array)
-        return data_array
-    else:               
-        print('Изменение отменено!')
+    if change_ID != None:
+        change_user = input('Изменить? Y/N: ')
+        # print(change_ID)
+        if change_user.upper() == 'Y':
+            what_change = input('Что изменить?\nФамилию - L, Имя - F, Отчество - S, Телефон - P, Всё - любой символ: ')
+            if what_change.upper() == 'L':
+                data_array[change_ID][1] = format_name(input('Фамилия: '))
+            elif what_change.upper() == 'F':
+                data_array[change_ID][2] = format_name(input('Имя: '))
+            elif what_change.upper() == 'S':
+                data_array[change_ID][3] = format_name(input('Отчество: '))
+            elif what_change.upper() == 'P':    
+                data_array[change_ID][4] = input('Телефон: ')
+            else:
+                data_array[change_ID][1] = format_name(input('Фамилия: '))
+                data_array[change_ID][2] = format_name(input('Имя: '))
+                data_array[change_ID][3] = format_name(input('Отчество: '))
+                data_array[change_ID][4] = input('Телефон: ')
+            print('Изменен ID: {}  Фамилия: {}  Имя: {}  Отчество: {}  Телефон: {}'.format(data_array[change_ID][0], data_array[change_ID][1], data_array[change_ID][2], data_array[change_ID][3], data_array[change_ID][4]))
+            
+            write_file(filename, data_array)
+            return data_array
+        else:               
+            print('Изменение отменено!')
     
 
 def delete_item(filename):
@@ -76,14 +86,16 @@ def delete_item(filename):
 
 def find_item(filename):
     data_array = read_file(filename)
-    find_user = input('Найти: ')
+    find_user = format_name(input('Найти: '))
     for i in range(1,len(data_array)):
         if find_user in data_array[i]:
             print('Найден ID: {}  Фамилия: {}  Имя: {}  Отчество: {}  Телефон: {}'.format(data_array[i][0], data_array[i][1], data_array[i][2], data_array[i][3], data_array[i][4]))
             return i
     print('Такого нет!')
 
-
+def format_name(name):
+    name = name[0].upper() + name[1:].lower()
+    return name
 
 def menu():
     print('Добро пожаловать в телефонный справочник!')
@@ -91,6 +103,7 @@ def menu():
     print('2 - Добавить запись')
     print('3 - Изменить запись')
     print('4 - Удалить запись')
+    print('5 - Найти запись')
     user_operation = int(input())
 
     if user_operation == 1:
@@ -101,8 +114,8 @@ def menu():
         change_item(filename)
     elif user_operation == 4:
         delete_item(filename)
-    # elif user_operation == 5:
-    #     find_item(filename)
+    elif user_operation == 5:
+        find_item(filename)
 
 filename = 'file.txt'
 menu()
