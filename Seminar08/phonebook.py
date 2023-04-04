@@ -87,15 +87,30 @@ def delete_item(filename):
 def find_item(filename):
     data_array = read_file(filename)
     find_user = format_name(input('Найти: '))
+    count_found_users = {}
     for i in range(1,len(data_array)):
         if find_user in data_array[i]:
             print('Найден ID: {}  Фамилия: {}  Имя: {}  Отчество: {}  Телефон: {}'.format(data_array[i][0], data_array[i][1], data_array[i][2], data_array[i][3], data_array[i][4]))
-            return i
-    print('Такого нет!')
+            found_user = i
+            count_found_users[data_array[i][0]] = found_user
+            
+    # print(count_found_users)
+    # print(len(count_found_users))
+    if len(count_found_users) > 1:
+        print('Выбери ID: ', end='')
+        # print(count_found_users[input()])
+        try:
+            return count_found_users[input()]
+        except:
+            print('Такого нет! Выбери из найденых!')
+    elif len(count_found_users) < 1:
+        print('Такого нет!')
+    else:
+        # print(i, len(data_array) - 1, count_found_users, )
+        return found_user
 
 def format_name(name):
-    name = name[0].upper() + name[1:].lower()
-    return name
+    return name[0].upper() + name[1:].lower()
 
 def menu():
     print('Добро пожаловать в телефонный справочник!')
